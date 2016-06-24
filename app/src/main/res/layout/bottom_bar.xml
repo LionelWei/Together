@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_57">
-
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp_60"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/bg_bottombar"
         android:orientation="horizontal">
 
 
         <RelativeLayout
-            android:id="@+id/activity_main_tab_search"
+            android:id="@+id/tab_home"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_4"
-                android:background="@drawable/tab_recommend_selector"
-                />
+                android:drawableTop="@drawable/tab_recommend_selector"
+                android:text="@string/bottom_bar_chat"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true" />
 
         </RelativeLayout>
 
 
 
         <RelativeLayout
-            android:id="@+id/activity_main_tab_discover"
+            android:id="@+id/tab_contacts"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_4"
-                android:background="@drawable/tab_search_selector"
-                />
+                android:drawableTop="@drawable/tab_search_selector"
+                android:text="@string/bottom_bar_contacts"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/activity_main_tab_user_center"
+            android:id="@+id/tab_my_center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -57,12 +57,14 @@
 
 
             <TextView
+                android:id="@+id/text_my_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_4"
-                android:background="@drawable/tab_my_selector"
-                />
+                android:drawableTop="@drawable/tab_my_selector"
+                android:text="@string/bottom_bar_my_center"
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true" />
         </RelativeLayout>
     </LinearLayout>
-</FrameLayout>
+</merge>
