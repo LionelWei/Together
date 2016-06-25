@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorMainBg">#FFB109</color>
-    <color name="briefProfileSelected">#C8C8C8</color>
-    <color name="briefProfileUnSelected">#FFFFFF</color>
+    <color name="briefProfileBgSelected">#C8C8C8</color>
+    <color name="briefProfileBgNormal">#FFFFFF</color>
+    <color name="loginRegisterBgSelected">#66FFFFFF</color>
+    <color name="loginRegisterBgNormal">#FFB109</color>
+    <color name="loginBg">#FFFFFF</color>
+    <color name="loginTextHint">#C8C8C8</color>
+    <color name="loginTextInput">#000000</color>
 </resources>

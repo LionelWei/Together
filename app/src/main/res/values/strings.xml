@@ -2,10 +2,16 @@
     <string name="app_name">Together</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty"></string>
     <string name="bottom_bar_chat">Chat</string>
     <string name="bottom_bar_contacts">Contacts</string>
     <string name="bottom_bar_my_center">me</string>
     <string name="fake_accid">ID: wdmjj</string>
     <string name="fake_username">LionelWei</string>
+    <string name="login_register">注册</string>
+    <string name="login_hint_account">请输入账号</string>
+    <string name="login_hint_password">请输入密码</string>
+    <string name="input_password">请输入密码</string>
+    <string name="input_nickname">请输入昵称</string>
+    <string name="input_account">请输入账号</string>
 </resources>
