@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="84dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/item_choose_selector"
+    android:clickable="true"
+    android:paddingBottom="@dimen/dp_11"
+    android:paddingLeft="@dimen/dp_12"
+    android:paddingRight="@dimen/dp_12">
+
+    <RelativeLayout
+        android:id="@+id/layout_avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ico_user_pic_default"
+            android:clickable="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_basic_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_17"
+        android:layout_toRightOf="@+id/layout_avatar"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7.5dp"
+            tools:text="@string/fake_username"
+            android:text="@string/fake_username"
+            android:textColor="#333333"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/dp_18" />
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/fake_accid"
+            android:text="@string/fake_accid"
+            android:textAppearance="@style/brief_profile_accid" />
+
+    </LinearLayout>
+
+</RelativeLayout>

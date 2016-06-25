@@ -6,4 +6,6 @@
     <string name="bottom_bar_chat">Chat</string>
     <string name="bottom_bar_contacts">Contacts</string>
     <string name="bottom_bar_my_center">me</string>
+    <string name="fake_accid">ID: wdmjj</string>
+    <string name="fake_username">LionelWei</string>
 </resources>

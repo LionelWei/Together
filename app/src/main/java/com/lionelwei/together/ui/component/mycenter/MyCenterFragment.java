@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.contacts;
+package com.lionelwei.together.ui.component.mycenter;
 
 
 import android.os.Bundle;
@@ -11,23 +11,23 @@ import com.lionelwei.together.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ContactsFragment#newInstance} factory method to
+ * Use the {@link MyCenterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactsFragment extends Fragment {
-    public static final String TAG_FRAGMENT = "ContactsFragment";
+public class MyCenterFragment extends Fragment {
+    public static final String TAG_FRAGMENT = "MyCenterFragment";
 
-    public ContactsFragment() {
+    public MyCenterFragment() {
         // Required empty public constructor
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     * @return A new instance of fragment ContactsFragment.
+     * @return A new instance of fragment MyCenterFragment.
      */
-    public static ContactsFragment newInstance() {
-        ContactsFragment fragment = new ContactsFragment();
+    public static MyCenterFragment newInstance() {
+        MyCenterFragment fragment = new MyCenterFragment();
         return fragment;
     }
 
@@ -40,7 +40,7 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts, container, false);
+        return inflater.inflate(R.layout.fragment_my_center, container, false);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.lionelwei.together;
+package com.lionelwei.together.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,12 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.lionelwei.together.R;
 import com.lionelwei.together.ui.adapter.MainViewPagerAdapter;
-import com.lionelwei.together.ui.contacts.ContactsFragment;
-import com.lionelwei.together.ui.home.HomeFragment;
-import com.lionelwei.together.ui.mycenter.MyCenterFragment;
+import com.lionelwei.together.ui.component.contacts.ContactsFragment;
+import com.lionelwei.together.ui.component.home.HomeFragment;
+import com.lionelwei.together.ui.component.mycenter.MyCenterFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
