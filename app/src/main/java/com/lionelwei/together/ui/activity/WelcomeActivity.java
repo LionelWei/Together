@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.lionelwei.together.R;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.ui.component.login.LoginActivity;
 
@@ -18,7 +17,9 @@ public class WelcomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        // 闪屏页不需要设置layout
+        // @see https://www.bignerdranch.com/blog/splash-screens-the-right-way/
+//        setContentView(R.layout.activity_welcome);
 
         // 闪屏页消失的太快, 延迟一下...
         mHandler.postDelayed(new Runnable() {
@@ -28,7 +29,7 @@ public class WelcomeActivity extends Activity {
                 overridePendingTransition(0, 0);
                 finish();
             }
-        }, 1000);
+        }, 500);
     }
 
     private boolean canAutoLogin() {

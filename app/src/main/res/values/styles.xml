@@ -23,8 +23,14 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashTheme" parent="@android:style/android:Theme.Light">
         <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="ThemeActivity" mce_bogus="1" parent="@android:style/android:Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">艺起</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="bottom_bar_chat">聊天</string>
+    <string name="bottom_bar_contacts">好友</string>
+    <string name="bottom_bar_my_center">我</string>
+    <string name="login_register">注册</string>
+    <string name="login_hint_account">请输入账号</string>
+    <string name="login_hint_password">请输入密码</string>
+    <string name="input_password">请输入密码</string>
+    <string name="input_nickname">请输入昵称</string>
+    <string name="input_account">请输入账号</string>
+    <string name="register_account_in_20chars">帐号限20位字母或者数字</string>
+    <string name="register_password_from_6_to_20chars">密码必须为6~20位字母或者数字</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
+    <string name="login_has_account">已有帐号？直接登录</string>
+    <string name="register_failed">注册失败</string>
+    <string name="register_success">注册成功</string>
+    <string name="register_no_account">还没有账号? 赶紧注册一个吧!</string>
+
+</resources>
