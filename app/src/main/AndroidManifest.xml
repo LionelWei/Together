@@ -66,7 +66,7 @@
             -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="key_of_your_app" />
+            android:value="f0f82ef20236c4ca044440a09c7e419a" />
 
 <!--
         &lt;!&ndash; 声明云信后台服务，如需保持后台推送，使用独立进程效果会更好。 &ndash;&gt;

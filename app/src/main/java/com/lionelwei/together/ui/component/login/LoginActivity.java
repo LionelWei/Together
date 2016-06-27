@@ -7,10 +7,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lionelwei.together.R;
 import com.lionelwei.together.common.util.ToastUtil;
@@ -22,6 +22,7 @@ import com.netease.nim.uikit.common.util.sys.NetworkUtil;
 import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -59,6 +60,18 @@ public class LoginActivity extends Activity {
 
     @BindView(R.id.btn_login)
     Button loginButton;
+
+    @BindString(R.string.register)
+    String STR_REGISTER;
+
+    @BindString(R.string.login)
+    String STR_LOGIN;
+
+    @BindString(R.string.network_is_not_available)
+    String STR_NETWORK_UNAVAILABLE;
+
+    @BindString(R.string.login_registering)
+    String STR_REGISTERING;
 
     private AbortableFuture<LoginInfo> loginRequest;
     private boolean registerMode = false; // 注册模式
@@ -254,16 +267,20 @@ public class LoginActivity extends Activity {
         }
 
         if (!NetworkUtil.isNetAvailable(LoginActivity.this)) {
-            Toast.makeText(LoginActivity.this, R.string.network_is_not_available, Toast.LENGTH_SHORT).show();
+            ToastUtil.show(STR_NETWORK_UNAVAILABLE);
             return;
         }
 
-        DialogMaker.showProgressDialog(this, getString(R.string.login_registering), false);
+        DialogMaker.showProgressDialog(this, STR_REGISTERING, false);
 
         // 注册流程
         final String account = registerAccountEdit.getText().toString();
         final String nickName = registerNickNameEdit.getText().toString();
         final String password = registerPasswordEdit.getText().toString();
+
+        Log.d("MY_LOGIN", "account: " + account);
+        Log.d("MY_LOGIN", "account: " + nickName);
+        Log.d("MY_LOGIN", "password: " + "*****");
 
 /*
         ContactHttpClient.getInstance().register(account, nickName, password, new ContactHttpClient.ContactHttpCallback<Void>() {
@@ -343,7 +360,7 @@ public class LoginActivity extends Activity {
             registerPanelInited = true;
         }
 
-        setTitle(registerMode ? getString(R.string.register) : getString(R.string.login));
+        setTitle(registerMode ? STR_REGISTER : STR_LOGIN);
         loginLayout.setVisibility(registerMode ? View.GONE : View.VISIBLE);
         registerLayout.setVisibility(registerMode ? View.VISIBLE : View.GONE);
         switchModeBtn.setText(registerMode
