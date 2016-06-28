@@ -8,22 +8,31 @@ package com.lionelwei.together.model.rest.user;
  * History:		2016/6/27 1.00 初始版本
  */
 
-import retrofit2.Call;
-import retrofit2.http.POST;
+import com.lionelwei.together.model.entity.user.BaseBean;
 
-public class LoginApi {
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+import rx.Observable;
+
+public interface LoginApi {
+    String BASE_URL = "http://api.netease.im/nimserver/user/";
     /**
      * 创建账号
      *  POST https://api.netease.im/nimserver/user/create.action HTTP/1.1
      *  Content-Type:application/x-www-form-urlencoded;charset=utf-8
      * @return
      */
-    @POST()
-    public Call<Object> register();
+    @FormUrlEncoded
+    @POST("create.action")
+    Observable<BaseBean> register(
+            @Field("accid") String accountId,
+            @Field("name") String nickName);
 
     /**
      * 登录
      */
     @POST()
-    public Call<Object> login();
+    Call<Object> login();
 }

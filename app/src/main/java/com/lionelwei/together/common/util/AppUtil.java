@@ -10,10 +10,15 @@ package com.lionelwei.together.common.util;
 
 import android.content.Context;
 
+import com.lionelwei.together.TgApplication;
+
 public class AppUtil {
+    private static Context mAppContext = TgApplication.getContext();
+
     public static boolean inMainProcess(Context context) {
         String packageName = context.getPackageName();
         String processName = SystemUtil.getProcessName(context);
         return packageName.equals(processName);
     }
+
 }

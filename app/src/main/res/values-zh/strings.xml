@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">艺起</string>
+    <!--<string name="app_name">艺起</string>-->
+    <string name="app_name">Together</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="bottom_bar_chat">聊天</string>

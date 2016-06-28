@@ -27,10 +27,10 @@
     <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
-        android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
+        android:name="com.lionelwei.together.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
     <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
-    <uses-permission android:name="com.netease.nim.demo.permission.RECEIVE_MSG" />
+    <uses-permission android:name="com.lionelwei.together.permission.RECEIVE_MSG" />
 
     <application
         android:name=".TgApplication"
@@ -68,8 +68,7 @@
             android:name="com.netease.nim.appKey"
             android:value="f0f82ef20236c4ca044440a09c7e419a" />
 
-<!--
-        &lt;!&ndash; 声明云信后台服务，如需保持后台推送，使用独立进程效果会更好。 &ndash;&gt;
+        <!-- 声明云信后台服务，如需保持后台推送，使用独立进程效果会更好。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" />
@@ -77,10 +76,10 @@
             android:name="com.netease.nimlib.service.NimService$Aux"
             android:process=":core" />
 
-        &lt;!&ndash;
+        <!--
              云信SDK的监视系统启动和网络变化的广播接收器，用户开机自启动以及网络变化时候重新登录，
             保持和 NimService 同一进程
-        &ndash;&gt;
+        -->
         <receiver
             android:name="com.netease.nimlib.service.NimReceiver"
             android:exported="false"
@@ -91,10 +90,10 @@
             </intent-filter>
         </receiver>
 
-        &lt;!&ndash; 云信进程间通信 Receiver &ndash;&gt;
+        <!-- 云信进程间通信 Receiver -->
         <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
 
-        &lt;!&ndash; 安卓保活配置 &ndash;&gt;
+        <!-- 安卓保活配置 -->
         <service
             android:name="com.netease.cosine.core.CosineService"
             android:process=":cosine" />
@@ -110,7 +109,6 @@
         <meta-data
             android:name="com.netease.cosine.target.receiver"
             android:value="com.netease.nimlib.service.NimReceiver" />
--->
     </application>
 
 </manifest>
