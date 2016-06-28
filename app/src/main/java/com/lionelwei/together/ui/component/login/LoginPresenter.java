@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.lionelwei.together.TgApplication;
 import com.lionelwei.together.common.util.KeyUtil;
+import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.model.entity.user.BaseBean;
 import com.lionelwei.together.model.rest.user.LoginApi;
@@ -57,7 +58,7 @@ public class LoginPresenter {
         // 这里为了简便起见，demo就直接使用了密码的md5作为token。
         // 如果开发者直接使用这个demo，只更改appkey，然后就登入自己的账户体系的话，需要传入同步到云信服务器的token，而不是用户密码。
         final String token = tokenFromPassword(password);
-        Log.d("MY_LOGIN", "acc: " + account + ", token: " + token);
+        Log.d("MY_LOGIN", "acc: " + account + ", pwd: " + password + ", token: " + token);
         // 登录
         mLoginRequest = NIMClient.getService(AuthService.class).login(new LoginInfo(account, token));
         mLoginRequest.setCallback(new RequestCallback<LoginInfo>() {
@@ -66,6 +67,7 @@ public class LoginPresenter {
                 Log.d("MY_LOGIN", "login success");
                 saveLoginInfo(account, token);
                 mLoginView.onLoginSuccess();
+                mLoginView.hideLoading();
 
 /*
                 // 初始化消息提醒
@@ -98,7 +100,7 @@ public class LoginPresenter {
         });
     }
 
-    public void register(String accountId, String nickName, String password){
+    public void register(final String accountId, String nickName, String password){
         if (!NetworkUtil.isNetAvailable(mAppContext)) {
             mLoginView.onNetworkError();
             return;
@@ -121,6 +123,7 @@ public class LoginPresenter {
                         if (baseBean.code != 200) {
                             mLoginView.onRegisterFailed();
                         } else {
+                            AccountCache.setAccount(accountId);
                             mLoginView.onRegisterSuccess();
                         }
                     }
