@@ -134,7 +134,16 @@ public class LoginActivity extends Activity implements ILoginVIew{
 
     @Override
     public void onRegisterSuccess() {
+        switchMode();  // 切换回登录
 
+        final String account = registerAccountEdit.getText().toString();
+        final String password = registerPasswordEdit.getText().toString();
+        loginAccountEdit.setText(account);
+        loginPasswordEdit.setText(password);
+
+        registerAccountEdit.setText("");
+        registerNickNameEdit.setText("");
+        registerPasswordEdit.setText("");
     }
 
     @Override

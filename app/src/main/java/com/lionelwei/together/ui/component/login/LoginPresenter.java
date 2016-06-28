@@ -105,7 +105,11 @@ public class LoginPresenter {
         }
 
         mLoginView.showRegLoading();
-        mLoginApi.register(accountId, nickName)
+
+        String token = tokenFromPassword(password);
+        Log.d("MY_LOGIN", "register pwd: " + password + ", token: " + token);
+
+        mLoginApi.register(accountId, nickName, token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<BaseBean>() {
@@ -116,6 +120,8 @@ public class LoginPresenter {
                         mLoginView.hideLoading();
                         if (baseBean.code != 200) {
                             mLoginView.onRegisterFailed();
+                        } else {
+                            mLoginView.onRegisterSuccess();
                         }
                     }
                 }, new Action1<Throwable>() {

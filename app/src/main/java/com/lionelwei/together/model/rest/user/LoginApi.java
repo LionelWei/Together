@@ -28,7 +28,8 @@ public interface LoginApi {
     @POST("create.action")
     Observable<BaseBean> register(
             @Field("accid") String accountId,
-            @Field("name") String nickName);
+            @Field("name") String nickName,
+            @Field("token") String token);
 
     /**
      * 登录
