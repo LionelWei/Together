@@ -7,29 +7,91 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.lionelwei.together.R;
+import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.ui.component.login.LoginActivity;
+import com.netease.nim.uikit.common.util.log.LogUtil;
 
 public class WelcomeActivity extends Activity {
     private static final String TAG = "Welcome";
 
-    private Handler mHandler = new Handler();
+    private static boolean mIsFirstLaunch = true;
+    private boolean mIsShowSplash = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 闪屏页不需要设置layout
         // @see https://www.bignerdranch.com/blog/splash-screens-the-right-way/
-//        setContentView(R.layout.activity_welcome);
+        // 更新: 采用云信demo的闪屏页方案
+        setContentView(R.layout.activity_welcome);
 
-        // 闪屏页消失的太快, 延迟一下...
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoginActivity.start(WelcomeActivity.this);
-                overridePendingTransition(0, 0);
-                finish();
+        if (!mIsFirstLaunch) {
+            onIntent();
+        } else {
+            showSplashView();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mIsFirstLaunch) {
+            mIsFirstLaunch = false;
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    if (canAutoLogin()) {
+                        onIntent();
+                    } else {
+                        LoginActivity.start(WelcomeActivity.this);
+                        finish();
+                    }
+                }
+            };
+            if (mIsShowSplash) {
+                new Handler().postDelayed(runnable, 500);
+            } else {
+                runnable.run();
             }
-        }, 500);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        /**
+         * 如果Activity在，不会走到onCreate，而是onNewIntent，这时候需要setIntent
+         * 场景：点击通知栏跳转到此，会收到Intent
+         */
+        setIntent(intent);
+        onIntent();
+    }
+
+    // 处理收到的Intent
+    private void onIntent() {
+        LogUtil.i(TAG, "onIntent...");
+
+        if (TextUtils.isEmpty(AccountCache.getAccount())) {
+            // 判断当前app是否正在运行
+            LoginActivity.start(this);
+            finish();
+        } else {
+            // 已经登录过了，处理过来的请求
+            Intent intent = getIntent();
+            if (!mIsFirstLaunch && intent == null) {
+                finish();
+            } else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showMainActivity();
+                    }
+                }, 500);
+            }
+        }
     }
 
     private boolean canAutoLogin() {
@@ -40,6 +102,11 @@ public class WelcomeActivity extends Activity {
         return !TextUtils.isEmpty(account) && !TextUtils.isEmpty(token);
     }
 
+    private void showSplashView() {
+        getWindow().setBackgroundDrawableResource(R.drawable.background_splash);
+        mIsShowSplash = true;
+    }
+
     private void showMainActivity() {
         showMainActivity(null);
     }
@@ -47,6 +114,7 @@ public class WelcomeActivity extends Activity {
     private void showMainActivity(Intent intent) {
         MainActivity.start(WelcomeActivity.this, intent);
         finish();
+        overridePendingTransition(0, 0);
     }
 
 }

@@ -99,7 +99,6 @@ public class LoginActivity extends Activity implements ILoginVIew{
 //        setupRegisterPanel();
     }
 
-
     @Override
     public void onNetworkError() {
         ToastUtil.show(STR_NETWORK_UNAVAILABLE);
