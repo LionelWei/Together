@@ -16,6 +16,7 @@ import com.lionelwei.together.common.util.KeyUtil;
 import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.model.entity.user.BaseBean;
+import com.lionelwei.together.model.rest.BaseUrl;
 import com.lionelwei.together.model.rest.core.ServiceGenerator;
 import com.lionelwei.together.model.rest.user.LoginApi;
 import com.netease.nim.uikit.common.util.string.MD5;
@@ -149,7 +150,7 @@ public class LoginPresenter {
 
     private void initNetwork() {
         mLoginApi = new ServiceGenerator.Builder()
-                .baseUrl(LoginApi.BASE_URL)
+                .baseUrl(BaseUrl.USER)
                 .build()
                 .createService(LoginApi.class);
     }

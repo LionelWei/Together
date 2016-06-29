@@ -26,7 +26,7 @@ public class ServiceGenerator {
                     .addConverterFactory(FastJsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
 
-    private OkHttpClient mClient;
+    private static OkHttpClient mClient = new OkHttpClient.Builder().build();
     private String mUrl;
 
     public <S> S createService(Class<S> serviceClass) {
@@ -43,10 +43,8 @@ public class ServiceGenerator {
     }
 
     private void initHttpClient(final Map<String, String> headers) {
-        if (headers == null) {
-            mClient = new OkHttpClient.Builder().build();
-        } else {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        if (headers != null) {
+            OkHttpClient.Builder builder = mClient.newBuilder();
             builder.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Interceptor.Chain chain) throws IOException {

@@ -20,7 +20,6 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 public interface LoginApi {
-    String BASE_URL = "http://api.netease.im/nimserver/user/";
     /**
      * 创建账号
      *  POST https://api.netease.im/nimserver/user/create.action HTTP/1.1
