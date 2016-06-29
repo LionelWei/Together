@@ -10,9 +10,12 @@ package com.lionelwei.together.model.rest.user;
 
 import com.lionelwei.together.model.entity.user.BaseBean;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -27,6 +30,7 @@ public interface LoginApi {
     @FormUrlEncoded
     @POST("create.action")
     Observable<BaseBean> register(
+            @HeaderMap Map<String, String> headers,
             @Field("accid") String accountId,
             @Field("name") String nickName,
             @Field("token") String token);

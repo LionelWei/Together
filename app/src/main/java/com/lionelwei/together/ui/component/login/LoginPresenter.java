@@ -16,6 +16,7 @@ import com.lionelwei.together.common.util.KeyUtil;
 import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.model.entity.user.BaseBean;
+import com.lionelwei.together.model.rest.core.ServiceGenerator;
 import com.lionelwei.together.model.rest.user.LoginApi;
 import com.netease.nim.uikit.common.util.string.MD5;
 import com.netease.nim.uikit.common.util.sys.NetworkUtil;
@@ -25,15 +26,10 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.fastjson.FastJsonConverterFactory;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -111,7 +107,18 @@ public class LoginPresenter {
         String token = tokenFromPassword(password);
         Log.d("MY_LOGIN", "register pwd: " + password + ", token: " + token);
 
-        mLoginApi.register(accountId, nickName, token)
+        long curTime = System.currentTimeMillis();
+        String nonce = KeyUtil.getNonce();
+        String checkSum = KeyUtil.getCheckSum(nonce, curTime + "");
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("AppKey", KeyUtil.getAppKey());
+        headers.put("Nonce", nonce);
+        headers.put("CurTime", curTime + "");
+        headers.put("CheckSum", checkSum);
+        headers.put("Content-Type", "application/x-www-form-urlencoded");
+
+        mLoginApi.register(headers, accountId, nickName, token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<BaseBean>() {
@@ -141,35 +148,10 @@ public class LoginPresenter {
     }
 
     private void initNetwork() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Interceptor.Chain chain) throws IOException {
-                Request original = chain.request();
-
-                long curTime = System.currentTimeMillis();
-                String nonce = KeyUtil.getNonce();
-                String checkSum = KeyUtil.getCheckSum(nonce, curTime + "");
-                Request request = original.newBuilder()
-                        .header("AppKey", KeyUtil.getAppKey())
-                        .header("Nonce", nonce)
-                        .header("CurTime", curTime + "")
-                        .header("CheckSum", checkSum)
-                        .header("Content-Type", "application/x-www-form-urlencoded")
-                        .method(original.method(), original.body())
-                        .build();
-
-                return chain.proceed(request);
-            }
-        });
-        OkHttpClient client = builder.build();
-        mRetrofit = new Retrofit.Builder()
+        mLoginApi = new ServiceGenerator.Builder()
                 .baseUrl(LoginApi.BASE_URL)
-                .addConverterFactory(FastJsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(client)
-                .build();
-        mLoginApi = mRetrofit.create(LoginApi.class);
+                .build()
+                .createService(LoginApi.class);
     }
 
     //DEMO中使用 username 作为 NIM 的account ，md5(password) 作为 token
