@@ -8,7 +8,10 @@ package com.lionelwei.together.model.rest.core;
  * History:		2016/6/27 1.00 初始版本
  */
 
+import com.lionelwei.together.common.util.KeyUtil;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Headers;
@@ -28,6 +31,7 @@ public class ServiceGenerator {
 
     private static OkHttpClient mClient = new OkHttpClient.Builder().build();
     private String mUrl;
+    private Map<String, String> mCommonHeader;
 
     public <S> S createService(Class<S> serviceClass) {
         Retrofit retrofit = mBuilder
@@ -43,42 +47,57 @@ public class ServiceGenerator {
     }
 
     private void initHttpClient(final Map<String, String> headers) {
-        if (headers != null) {
-            OkHttpClient.Builder builder = mClient.newBuilder();
-            builder.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Interceptor.Chain chain) throws IOException {
-                    Request original = chain.request();
+        OkHttpClient.Builder builder = mClient.newBuilder();
+        builder = addHeader(builder, headers);
+        mClient = builder.build();
+    }
 
-                    Headers.Builder headerBuilder = new Headers.Builder();
-                    for (Map.Entry<String, String> entry : headers.entrySet()) {
-                        String value =  entry.getValue();
-                        String key = entry.getKey();
-                        headerBuilder.add(value, key);
-                    }
-                    Headers newHeaders = headerBuilder.build();
+    private OkHttpClient.Builder addHeader(OkHttpClient.Builder builder,
+                                           final Map<String, String> headers) {
+        long curTime = System.currentTimeMillis();
+        String nonce = KeyUtil.getNonce();
+        String checkSum = KeyUtil.getCheckSum(nonce, curTime + "");
+        mCommonHeader = new HashMap<>();
+        mCommonHeader.put("AppKey", KeyUtil.getAppKey());
+        mCommonHeader.put("Nonce", nonce);
+        mCommonHeader.put("CurTime", curTime + "");
+        mCommonHeader.put("CheckSum", checkSum);
+        mCommonHeader.put("Content-Type", "application/x-www-form-urlencoded");
 
-                    Request request = original.newBuilder()
-                            .headers(newHeaders)
-                            .method(original.method(), original.body())
-                            .build();
+        return builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Interceptor.Chain chain) throws IOException {
+                Request original = chain.request();
 
-                    return chain.proceed(request);
+                Headers.Builder headerBuilder = new Headers.Builder();
+                for (Map.Entry<String, String> entry : mCommonHeader.entrySet()) {
+                    String value =  entry.getValue();
+                    String key = entry.getKey();
+                    headerBuilder.set(key, value);
                 }
-            });
-            mClient = builder.build();
-        }
+                if (headers != null) {
+                    for (Map.Entry<String, String> entry : headers.entrySet()) {
+                        String value = entry.getValue();
+                        String key = entry.getKey();
+                        headerBuilder.set(key, value);
+                    }
+                }
+                Headers newHeaders = headerBuilder.build();
+
+                Request request = original.newBuilder()
+                        .headers(newHeaders)
+                        .method(original.method(), original.body())
+                        .build();
+
+                return chain.proceed(request);
+            }
+        });
+
     }
 
     public static class Builder {
-        private OkHttpClient mOkHttpClient;
         private String mBaseUrl;
         private Map<String, String> mHeaders;
-
-        public Builder httpClient(OkHttpClient okHttpClient) {
-            this.mOkHttpClient = okHttpClient;
-            return this;
-        }
 
         public Builder baseUrl(String url) {
             this.mBaseUrl = url;

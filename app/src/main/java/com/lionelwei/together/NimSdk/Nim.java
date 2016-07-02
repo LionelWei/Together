@@ -52,7 +52,7 @@ public class Nim {
         mNimOption = new NimOption(mContext, mUserInfoProvider);
     }
 
-    private void initUIKit() {
+    public void initUIKit() {
         // 初始化，需要传入用户信息提供者
         NimUIKit.init(mContext, mUserInfoProvider, contactProvider);
 

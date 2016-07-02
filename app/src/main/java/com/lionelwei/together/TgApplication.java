@@ -21,6 +21,7 @@ public class TgApplication extends Application{
             // 注意：以下操作必须在主进程中进行
             // 1、UI相关初始化操作
             // 2、相关Service调用
+            Nim.getInstace().initUIKit();
         }
     }
 

@@ -3,21 +3,22 @@ package com.lionelwei.together.ui.component.mycenter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lionelwei.together.R;
-import com.lionelwei.together.common.util.KeyUtil;
 import com.lionelwei.together.common.util.ToastUtil;
+import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.model.entity.user.UserProfileBean;
 import com.lionelwei.together.model.rest.BaseUrl;
 import com.lionelwei.together.model.rest.core.ServiceGenerator;
 import com.lionelwei.together.model.rest.user.UserProfileApi;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ import rx.schedulers.Schedulers;
  */
 public class MyCenterFragment extends Fragment {
     public static final String TAG_FRAGMENT = "MyCenterFragment";
+    public static final String TAG = "MyCenterFragment";
     @BindView(R.id.tv_nick_name)
     TextView tvNickName;
     @BindView(R.id.tv_id)
@@ -66,6 +68,7 @@ public class MyCenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_center, container, false);
         unbinder = ButterKnife.bind(this, view);
@@ -75,30 +78,26 @@ public class MyCenterFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        Log.d(TAG, "onDestroyView");
         super.onDestroyView();
         unbinder.unbind();
     }
 
 
     private void getUserProfile() {
-        long curTime = System.currentTimeMillis();
-        String nonce = KeyUtil.getNonce();
-        String checkSum = KeyUtil.getCheckSum(nonce, curTime + "");
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("AppKey", KeyUtil.getAppKey());
-        headers.put("Nonce", nonce);
-        headers.put("CurTime", curTime + "");
-        headers.put("CheckSum", checkSum);
-        headers.put("Content-Type", "application/x-www-form-urlencoded");
-
         mProfileApi = new ServiceGenerator.Builder()
                 .baseUrl(BaseUrl.USER)
-                .headers(headers)
                 .build()
                 .createService(UserProfileApi.class);
-        
-        mProfileApi.getUserProfile()
+
+        JSONArray array = new JSONArray();
+        try {
+            array.put(0, AccountCache.getAccount());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mProfileApi.getUserProfile(array)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<UserProfileBean>() {

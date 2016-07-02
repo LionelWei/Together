@@ -12,7 +12,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.lionelwei.together.TgApplication;
-import com.lionelwei.together.common.util.KeyUtil;
 import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.model.entity.user.BaseBean;
@@ -26,9 +25,6 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
@@ -108,18 +104,7 @@ public class LoginPresenter {
         String token = tokenFromPassword(password);
         Log.d("MY_LOGIN", "register pwd: " + password + ", token: " + token);
 
-        long curTime = System.currentTimeMillis();
-        String nonce = KeyUtil.getNonce();
-        String checkSum = KeyUtil.getCheckSum(nonce, curTime + "");
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("AppKey", KeyUtil.getAppKey());
-        headers.put("Nonce", nonce);
-        headers.put("CurTime", curTime + "");
-        headers.put("CheckSum", checkSum);
-        headers.put("Content-Type", "application/x-www-form-urlencoded");
-
-        mLoginApi.register(headers, accountId, nickName, token)
+        mLoginApi.register(accountId, nickName, token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<BaseBean>() {

@@ -33,9 +33,9 @@ public class NimOption {
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
-        config.notificationSmallIconId = R.mipmap.ic_launcher;
+        config.notificationSmallIconId = R.drawable.notification_small_icon;
         // 呼吸灯配置
-        config.ledARGB = Color.GREEN;
+        config.ledARGB = Color.BLUE;
         config.ledOnMs = 1000;
         config.ledOffMs = 1500;
         // 通知铃声的uri字符串

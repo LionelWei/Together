@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import com.lionelwei.together.R;
 import com.lionelwei.together.ui.adapter.MainViewPagerAdapter;
 import com.lionelwei.together.ui.component.contacts.ContactsFragment;
-import com.lionelwei.together.ui.component.home.HomeFragment;
+import com.lionelwei.together.ui.component.sessionlist.SessionListFragment;
 import com.lionelwei.together.ui.component.mycenter.MyCenterFragment;
 
 import butterknife.BindView;
@@ -117,7 +117,7 @@ public class MainActivity extends FragmentActivity {
 
     private String[] newFragmentTag() {
         String[] tags = new String[3];
-        tags[INDEX_HOME] = HomeFragment.TAG_FRAGMENT;
+        tags[INDEX_HOME] = SessionListFragment.TAG_FRAGMENT;
         tags[INDEX_CONTACTS] = ContactsFragment.TAG_FRAGMENT;
         tags[INDEX_MY_CENTER] = MyCenterFragment.TAG_FRAGMENT;
         return tags;
@@ -127,12 +127,13 @@ public class MainActivity extends FragmentActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentTags = newFragmentTag();
         Fragment[] fragments = new Fragment[3];
-        fragments[0] = HomeFragment.newInstance();
+        fragments[0] = SessionListFragment.newInstance();
         fragments[1] = ContactsFragment.newInstance();
         fragments[2] = MyCenterFragment.newInstance();
         MainViewPagerAdapter adapter =
                 new MainViewPagerAdapter(mFragmentManager, mFragmentTags, fragments);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     /**
@@ -166,7 +167,7 @@ public class MainActivity extends FragmentActivity {
     private Fragment newFragment() {
         switch (mCurrIndex) {
             case INDEX_HOME:
-                return HomeFragment.newInstance();
+                return SessionListFragment.newInstance();
             case INDEX_CONTACTS:
                 return ContactsFragment.newInstance();
             case INDEX_MY_CENTER:
