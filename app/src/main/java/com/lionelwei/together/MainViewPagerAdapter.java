@@ -1,10 +1,8 @@
-package com.lionelwei.together.ui.adapter;
+package com.lionelwei.together;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.view.View;
 
 /**
  * Created by Lionel on 2016/6/24.

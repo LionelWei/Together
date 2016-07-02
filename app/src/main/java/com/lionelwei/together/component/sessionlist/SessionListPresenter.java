@@ -5,6 +5,7 @@ import android.content.Context;
 import com.lionelwei.together.common.helper.SessionHelper;
 import com.lionelwei.together.common.util.TestUtil;
 import com.lionelwei.together.config.AccountCache;
+import com.lionelwei.together.interfaces.IAdapter;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
@@ -23,12 +24,12 @@ import java.util.List;
     // 负责控制view的更新
     private ISessionListView mView;
     // 负责控制adapter数据的更新
-    private ISessionListAdapter mAdapter;
+    private IAdapter mAdapter;
     // 实际的数据
     private List<RecentContact> mRecentList;
 
 
-    public SessionListPresenter(ISessionListView view, ISessionListAdapter adapter) {
+    public SessionListPresenter(ISessionListView view, IAdapter adapter) {
         mView = view;
         mAdapter = adapter;
     }

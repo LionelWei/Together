@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lionelwei.together.R;
+import com.lionelwei.together.interfaces.IAdapter;
 import com.netease.nim.uikit.common.ui.imageview.HeadImageView;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 
@@ -21,16 +22,16 @@ import butterknife.OnClick;
 /**
  * Created by Lionel on 2016/7/2.
  */
-public class SessionListAdapterImpl
-        extends RecyclerView.Adapter<SessionListAdapterImpl.SessionListHolder>
-        implements ISessionListAdapter {
+public class SessionListAdapter
+        extends RecyclerView.Adapter<SessionListAdapter.SessionListHolder>
+        implements IAdapter<SessionListPresenter, RecentContact> {
 
     private Context mContext;
     private SessionListPresenter mPresenter;
 
     private List<RecentContact> mItems;
 
-    public SessionListAdapterImpl(Context context) {
+    public SessionListAdapter(Context context) {
         mContext = context;
     }
 

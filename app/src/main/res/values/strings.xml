@@ -24,4 +24,6 @@
     <string name="register_failed">Fail to sign up</string>
     <string name="register_success">Success to sign up</string>
     <string name="register_no_account">No account? Sign up now!</string>
+    <string name="clear_chat_logs">Remove all logs</string>
+    <string name="logout">Unregister</string>
 </resources>

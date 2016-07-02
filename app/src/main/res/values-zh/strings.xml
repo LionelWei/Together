@@ -21,5 +21,7 @@
     <string name="register_failed">注册失败</string>
     <string name="register_success">注册成功</string>
     <string name="register_no_account">还没有账号? 赶紧注册一个吧!</string>
+    <string name="clear_chat_logs">清除聊天记录</string>
+    <string name="logout">注销</string>
 
 </resources>

@@ -27,7 +27,7 @@ public class SessionListFragment extends TFragment implements ISessionListView {
     private Context mContext;
     private Unbinder mUnBinder;
     private SessionListPresenter mPresenter;
-    private SessionListAdapterImpl mAdapter;
+    private SessionListAdapter mAdapter;
 
     @BindView(R.id.id_recyclerview)
     RecyclerView mRecyclerView;
@@ -103,7 +103,7 @@ public class SessionListFragment extends TFragment implements ISessionListView {
     }
 
     private void initView() {
-        mAdapter = new SessionListAdapterImpl(mContext);
+        mAdapter = new SessionListAdapter(mContext);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }

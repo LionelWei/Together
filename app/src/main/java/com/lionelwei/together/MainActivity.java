@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.lionelwei.together.common.helper.SessionHelper;
-import com.lionelwei.together.ui.adapter.MainViewPagerAdapter;
 import com.lionelwei.together.component.contacts.ContactsFragment;
 import com.lionelwei.together.component.mycenter.MyCenterFragment;
 import com.lionelwei.together.component.sessionlist.SessionListFragment;

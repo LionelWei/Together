@@ -16,6 +16,24 @@
             <include
                 android:id="@+id/btn_go_to_info"
                 layout="@layout/my_center_profile_brief" />
+
+            <TextView
+                android:id="@+id/clear_logs"
+                android:text="@string/clear_chat_logs"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textSize="@dimen/dp_25"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="@string/logout"
+                android:gravity="center"
+                android:textSize="@dimen/dp_25"
+                android:textColor="@color/white"
+                android:background="#ff0000"/>
+
         </LinearLayout>
 
     </ScrollView>

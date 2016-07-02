@@ -1,4 +1,4 @@
-package com.lionelwei.together.NimSdk;
+package com.lionelwei.together.nimsdk;
 
 /*
  * FileName:	

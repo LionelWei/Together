@@ -2,7 +2,7 @@ package com.lionelwei.together;
 
 import android.app.Application;
 
-import com.lionelwei.together.NimSdk.Nim;
+import com.lionelwei.together.nimsdk.Nim;
 import com.lionelwei.together.common.util.AppUtil;
 
 public class TgApplication extends Application{
