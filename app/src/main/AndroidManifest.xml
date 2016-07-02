@@ -40,7 +40,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeActivity">
             <intent-filter>
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.component.login.LoginActivity"
+            android:name=".component.login.LoginActivity"
             android:screenOrientation="portrait" />
         <!--
         APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
@@ -114,7 +114,7 @@
             android:name="com.netease.cosine.target.receiver"
             android:value="com.netease.nimlib.service.NimReceiver" />
 
-        <activity android:name=".ui.component.conversation.ConversationActivity"
+        <activity android:name=".component.conversation.ConversationActivity"
             android:screenOrientation="portrait"/>
     </application>
 

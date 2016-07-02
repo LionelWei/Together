@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.conversation;
+package com.lionelwei.together.component.conversation;
 
 import android.app.Activity;
 import android.content.Context;

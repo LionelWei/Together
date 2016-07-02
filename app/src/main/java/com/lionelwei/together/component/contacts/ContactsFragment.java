@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.contacts;
+package com.lionelwei.together.component.contacts;
 
 
 import android.os.Bundle;

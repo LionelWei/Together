@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.activity;
+package com.lionelwei.together;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.lionelwei.together.R;
 import com.lionelwei.together.common.helper.SessionHelper;
 import com.lionelwei.together.ui.adapter.MainViewPagerAdapter;
-import com.lionelwei.together.ui.component.contacts.ContactsFragment;
-import com.lionelwei.together.ui.component.mycenter.MyCenterFragment;
-import com.lionelwei.together.ui.component.sessionlist.SessionListFragment;
+import com.lionelwei.together.component.contacts.ContactsFragment;
+import com.lionelwei.together.component.mycenter.MyCenterFragment;
+import com.lionelwei.together.component.sessionlist.SessionListFragment;
 import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 

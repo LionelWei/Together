@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.activity;
+package com.lionelwei.together;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,10 +7,9 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.lionelwei.together.R;
 import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
-import com.lionelwei.together.ui.component.login.LoginActivity;
+import com.lionelwei.together.component.login.LoginActivity;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.msg.model.IMMessage;

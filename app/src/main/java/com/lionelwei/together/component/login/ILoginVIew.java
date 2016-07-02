@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.login;
+package com.lionelwei.together.component.login;
 
 /*
  * FileName:	

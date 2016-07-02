@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.mycenter;
+package com.lionelwei.together.component.mycenter;
 
 
 import android.os.Bundle;

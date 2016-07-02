@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.login;
+package com.lionelwei.together.component.login;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.lionelwei.together.R;
 import com.lionelwei.together.common.util.ToastUtil;
 import com.lionelwei.together.config.preference.Preferences;
-import com.lionelwei.together.ui.activity.MainActivity;
+import com.lionelwei.together.MainActivity;
 import com.netease.nim.uikit.common.ui.dialog.DialogMaker;
 import com.netease.nim.uikit.common.ui.widget.ClearableEditTextWithIcon;
 

@@ -14,7 +14,7 @@ import android.media.RingtoneManager;
 import android.os.Environment;
 
 import com.lionelwei.together.R;
-import com.lionelwei.together.ui.activity.WelcomeActivity;
+import com.lionelwei.together.WelcomeActivity;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;

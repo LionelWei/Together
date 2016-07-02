@@ -1,4 +1,4 @@
-package com.lionelwei.together.ui.component.login;
+package com.lionelwei.together.component.login;
 
 /*
  * FileName:	
@@ -26,14 +26,12 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
-import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class LoginPresenter {
+/*package*/ class LoginPresenter {
     private ILoginVIew mLoginView;
-    private Retrofit mRetrofit;
     private LoginApi mLoginApi;
     private Context mAppContext;
     private AbortableFuture<LoginInfo> mLoginRequest;
