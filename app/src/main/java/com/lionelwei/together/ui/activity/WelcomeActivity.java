@@ -12,6 +12,10 @@ import com.lionelwei.together.config.AccountCache;
 import com.lionelwei.together.config.preference.Preferences;
 import com.lionelwei.together.ui.component.login.LoginActivity;
 import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nimlib.sdk.NimIntent;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
+
+import java.util.ArrayList;
 
 public class WelcomeActivity extends Activity {
     private static final String TAG = "Welcome";
@@ -21,6 +25,7 @@ public class WelcomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         // 闪屏页不需要设置layout
         // @see https://www.bignerdranch.com/blog/splash-screens-the-right-way/
@@ -81,6 +86,12 @@ public class WelcomeActivity extends Activity {
         } else {
             // 已经登录过了，处理过来的请求
             Intent intent = getIntent();
+            if (intent != null) {
+                if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+                    parseNotifyIntent(intent);
+                    return;
+                }
+            }
             if (!mIsFirstLaunch && intent == null) {
                 finish();
             } else {
@@ -105,6 +116,17 @@ public class WelcomeActivity extends Activity {
     private void showSplashView() {
         getWindow().setBackgroundDrawableResource(R.drawable.background_splash);
         mIsShowSplash = true;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void parseNotifyIntent(Intent intent) {
+        ArrayList<IMMessage> messages =
+                (ArrayList<IMMessage>) intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+        if (messages == null || messages.size() > 1) {
+            showMainActivity(null);
+        } else {
+            showMainActivity(new Intent().putExtra(NimIntent.EXTRA_NOTIFY_CONTENT, messages.get(0)));
+        }
     }
 
     private void showMainActivity() {

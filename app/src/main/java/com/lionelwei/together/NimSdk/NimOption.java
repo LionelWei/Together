@@ -10,10 +10,11 @@ package com.lionelwei.together.NimSdk;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.Environment;
 
 import com.lionelwei.together.R;
-import com.lionelwei.together.ui.activity.MainActivity;
+import com.lionelwei.together.ui.activity.WelcomeActivity;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
@@ -32,14 +33,17 @@ public class NimOption {
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
-        config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
+        config.notificationEntrance = WelcomeActivity.class; // 点击通知栏跳转到该Activity
         config.notificationSmallIconId = R.drawable.notification_small_icon;
         // 呼吸灯配置
         config.ledARGB = Color.BLUE;
         config.ledOnMs = 1000;
         config.ledOffMs = 1500;
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.netease.nim.demo/raw/msg";
+        config.notificationSound =
+                RingtoneManager
+                        .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                        .toString();
         options.statusBarNotificationConfig = config;
 
         // 配置保存图片，文件，log 等数据的目录

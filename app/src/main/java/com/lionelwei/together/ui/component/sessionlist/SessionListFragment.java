@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lionelwei.together.R;
+import com.lionelwei.together.common.helper.SessionHelper;
 import com.lionelwei.together.common.util.TestUtil;
 import com.lionelwei.together.config.AccountCache;
-import com.netease.nim.uikit.NimUIKit;
-import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,7 +94,7 @@ public class SessionListFragment extends Fragment {
                 TestUtil.TEST_ACCOUNT_1.equals(account)
                 ? TestUtil.TEST_ACCOUNT_2
                 : TestUtil.TEST_ACCOUNT_1;
-        NimUIKit.startChatting(mContext, chatObject, SessionTypeEnum.P2P, null);
+        SessionHelper.startP2PSession(mContext, chatObject);
 
 //        ConversationActivity.start(mContext);
     }

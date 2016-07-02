@@ -2,20 +2,22 @@ package com.lionelwei.together.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.lionelwei.together.R;
+import com.lionelwei.together.common.helper.SessionHelper;
 import com.lionelwei.together.ui.adapter.MainViewPagerAdapter;
 import com.lionelwei.together.ui.component.contacts.ContactsFragment;
-import com.lionelwei.together.ui.component.sessionlist.SessionListFragment;
 import com.lionelwei.together.ui.component.mycenter.MyCenterFragment;
+import com.lionelwei.together.ui.component.sessionlist.SessionListFragment;
+import com.netease.nimlib.sdk.NimIntent;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +68,9 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        onParseIntent();
+
         if (mCurrIndex == -1) {
             mCurrIndex = INDEX_HOME;
         }
@@ -74,6 +79,12 @@ public class MainActivity extends FragmentActivity {
         }
         initView();
         initEvent();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        onParseIntent();
     }
 
     @Override
@@ -87,10 +98,23 @@ public class MainActivity extends FragmentActivity {
         outState.putInt(SAVE_STATE_KEY_CUR_INDEX, mCurrIndex);
     }
 
+    private void onParseIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            IMMessage message = (IMMessage) getIntent().getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+            switch (message.getSessionType()) {
+                case P2P:
+                    SessionHelper.startP2PSession(this, message.getSessionId());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private void initView() {
         initViewPager();
         changeStatusById(mCurrIndex);
-//        notifyFragmentChanged();
     }
 
     private void initEvent() {
@@ -134,34 +158,6 @@ public class MainActivity extends FragmentActivity {
                 new MainViewPagerAdapter(mFragmentManager, mFragmentTags, fragments);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(3);
-    }
-
-    /**
-     * index数据改变导致fragment显示状态变化
-     */
-    private void notifyFragmentChanged() {
-        FragmentTransaction fragmentTransaction = mFragmentManager
-                .beginTransaction();
-        Fragment fragment = mFragmentManager
-                .findFragmentByTag(mFragmentTags[mCurrIndex]);
-        if (fragment == null) {
-            fragment = newFragment();
-        }
-        //隐藏所有其他不该显示的fragment
-        for (String tag : mFragmentTags) {
-            Fragment f = mFragmentManager.findFragmentByTag(tag);
-            if (f != null && f.isAdded()) {
-                fragmentTransaction.hide(f);
-            }
-        }
-        if (fragment.isAdded()) {//fragment如果已经添加到页面，就直接显示
-            fragmentTransaction.show(fragment);
-        } else {
-            fragmentTransaction.add(R.id.activity_main_container, fragment,
-                    mFragmentTags[mCurrIndex]);
-        }
-        fragmentTransaction.commitAllowingStateLoss();
-        mFragmentManager.executePendingTransactions();
     }
 
     private Fragment newFragment() {
@@ -212,7 +208,6 @@ public class MainActivity extends FragmentActivity {
         }
         changeStatusById(mCurrIndex);
         mViewPager.setCurrentItem(mCurrIndex, false);
-//        notifyFragmentChanged();
     }
 
 
