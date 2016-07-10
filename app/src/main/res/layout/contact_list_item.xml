@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/nim_list_item_selector"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/top_line"
+        style="@style/horizontal_light_thin_divider"/>
+
+    <TextView
+        android:id="@+id/contact_item_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_65"
+        android:textSize="@dimen/dp_32"
+        android:gravity="center_vertical"
+        android:background="@drawable/item_choose_selector"
+        tools:text="wdmjj"/>
+
+    <View
+        android:id="@+id/bottom_line"
+        style="@style/horizontal_light_thin_divider"/>
+
+</LinearLayout>

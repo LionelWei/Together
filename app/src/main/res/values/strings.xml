@@ -26,4 +26,7 @@
     <string name="register_no_account">No account? Sign up now!</string>
     <string name="clear_chat_logs">Remove all logs</string>
     <string name="logout">Unregister</string>
+    <string name="add_friend">Add friend</string>
+    <string name="contact_input_friend_account">Please input account within 20 chars</string>
+    <string name="search_friend">Search</string>
 </resources>

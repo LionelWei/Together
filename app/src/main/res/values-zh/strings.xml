@@ -23,5 +23,7 @@
     <string name="register_no_account">还没有账号? 赶紧注册一个吧!</string>
     <string name="clear_chat_logs">清除聊天记录</string>
     <string name="logout">注销</string>
-
+    <string name="add_friend">添加好友</string>
+    <string name="contact_input_friend_account">请输入账号, 限20个字符</string>
+    <string name="search_friend">搜索</string>
 </resources>
